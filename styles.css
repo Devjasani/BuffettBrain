@@ -1,0 +1,804 @@
+/* styles.css - World's Best Beta Version Design */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+    /* Cyberpunk / High-Tech Palette */
+    --bg-deep: #050510;
+    --bg-panel: #0f1020;
+
+    --neon-blue: #38bdf8;
+    /* Softer Sky Blue */
+    --neon-purple: #c084fc;
+    /* Softer Purple */
+    --neon-gold: #fbbf24;
+    /* Softer Gold */
+    --neon-green: #4ade80;
+    /* Softer Green */
+    --error: #ef4444;
+
+    --glass-surface: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.1);
+
+    --text-main: #ffffff;
+    --text-dim: #8b9bb4;
+
+    --font-heading: 'Outfit', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* 3D & Animation */
+    --ease-elastic: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 1. Global Reset & Animation Background */
+/* 1. Global Reset & Animation Background */
+.stApp {
+    background-color: #030303;
+    /* Deepest black */
+    background-image:
+        radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+        radial-gradient(at 50% 0%, hsla(225, 39%, 25%, 1) 0, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: var(--font-heading) !important;
+}
+
+/* Floating Animation Keyframes */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes glow-pulse {
+    0% {
+        box-shadow: 0 0 5px var(--neon-blue);
+    }
+
+    50% {
+        box-shadow: 0 0 20px var(--neon-blue), 0 0 10px var(--neon-purple);
+    }
+
+    100% {
+        box-shadow: 0 0 5px var(--neon-blue);
+    }
+}
+
+/* 2. Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading) !important;
+    color: var(--text-main) !important;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    letter-spacing: -0.02em;
+}
+
+.header-title {
+    margin: 0;
+    font-size: 1.8rem;
+    background: linear-gradient(90deg, #fff, #8b9bb4);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -1px;
+    font-weight: 800;
+}
+
+p,
+li,
+label,
+.stMarkdown {
+    color: var(--text-dim) !important;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+code {
+    font-family: var(--font-mono) !important;
+    color: var(--neon-gold) !important;
+    background: rgba(255, 215, 0, 0.1) !important;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* 3. 3D Glass Cards */
+/* 3. 3D Glass Cards - Premium Polish */
+.card-3d {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    /* Highlight top border */
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.card-3d:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow:
+        0 20px 40px -10px rgba(0, 0, 0, 0.6),
+        0 0 20px rgba(56, 189, 248, 0.1);
+    /* Very subtle ambient glow */
+}
+
+/* 4. Streamlit Elements Overrides */
+
+/* Buttons */
+.stButton>button {
+    background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.1) 50%, transparent 100%);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    border-radius: 4px;
+    /* More techy, less rounded */
+    padding: 0.8rem 2rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stButton>button:hover {
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--neon-blue);
+    border-color: var(--neon-blue);
+    transform: scale(1.02);
+}
+
+.stButton>button:active {
+    transform: scale(0.98);
+}
+
+/* Primary Button Override (for "Analyze Stock") */
+div[data-testid="stButton"]>button[kind="primary"] {
+    background: linear-gradient(135deg, var(--neon-blue) 0%, var(--brand-primary) 100%);
+    color: #000;
+    border: none;
+    box-shadow: 0 0 15px var(--neon-blue);
+    border-radius: 999px;
+    /* Added border-radius */
+}
+
+div[data-testid="stButton"]>button[kind="primary"]:hover {
+    /* Removed neon glow */
+    color: #fff;
+    transform: scale(1.02);
+}
+
+/* Inputs */
+.stTextInput>div>div>input,
+.stSelectbox>div>div {
+    background: rgba(15, 16, 32, 0.8);
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    border-radius: 10px;
+    height: 50px;
+}
+
+.stTextInput>div>div>input:focus,
+.stSelectbox>div>div[aria-expanded="true"] {
+    border-color: var(--neon-purple);
+    /* Removed neon glow */
+}
+
+/* Metrics */
+div[data-testid="metric-container"] {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+div[data-testid="metric-container"]:hover {
+    /* Removed neon glow */
+    transform: scale(1.05);
+}
+
+div[data-testid="stMetricValue"] {
+    font-family: var(--font-mono);
+    font-size: 2.2rem !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: rgba(3, 3, 3, 0.5);
+    /* Semi-transparent to show mesh */
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+}
+
+/* DataFrames */
+.dataframe {
+    font-family: var(--font-mono) !important;
+    background: transparent !important;
+}
+
+.dataframe th {
+    background: rgba(0, 243, 255, 0.1) !important;
+    color: var(--neon-blue) !important;
+    border-bottom: 1px solid var(--neon-blue) !important;
+    text-transform: uppercase;
+}
+
+.dataframe td {
+    color: #ccc !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 5. Custom Utility Classes (for injection) */
+
+/* Recommendation Cards */
+.rec-buy {
+    border-left: 5px solid var(--neon-green) !important;
+    background: rgba(74, 222, 128, 0.05) !important;
+}
+
+.rec-hold {
+    border-left: 5px solid var(--neon-gold) !important;
+    background: rgba(251, 191, 36, 0.05) !important;
+}
+
+.rec-avoid {
+    border-left: 5px solid var(--error) !important;
+    background: rgba(239, 68, 68, 0.05) !important;
+}
+
+/* Score & Progress */
+.section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    margin: 3rem 0;
+}
+
+.score-progress {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.score-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+    box-shadow: 0 0 10px var(--neon-blue);
+    transition: width 1s ease-out;
+}
+
+.score-badge {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    text-align: center;
+    border: 1px solid var(--glass-border);
+}
+
+.score-excellent {
+    color: var(--neon-green);
+    border-color: var(--neon-green);
+    background: rgba(74, 222, 128, 0.1);
+}
+
+.score-good {
+    color: var(--neon-blue);
+    border-color: var(--neon-blue);
+    background: rgba(56, 189, 248, 0.1);
+}
+
+.score-average {
+    color: var(--neon-gold);
+    border-color: var(--neon-gold);
+    background: rgba(251, 191, 36, 0.1);
+}
+
+.score-poor {
+    color: var(--error);
+    border-color: var(--error);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.glass-header {
+    background: rgba(5, 5, 16, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 -1rem 2rem -1rem;
+    /* Break out of container */
+}
+
+/* Badges & Pills */
+.smart-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--glass-border);
+    margin-bottom: 0.8rem;
+    padding: 1rem 1.5rem;
+    border-radius: 999px;
+    transition: all 0.3s var(--ease-elastic);
+}
+
+.smart-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(5px) scale(1.01);
+    border-left: 4px solid var(--neon-blue);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.smart-label {
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.smart-sub {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: 4px;
+    font-family: var(--font-mono);
+}
+
+.smart-value {
+    font-family: var(--font-mono);
+    color: var(--neon-gold);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-right: 1rem;
+}
+
+.smart-icon {
+    font-size: 1.4rem;
+    /* Removed drop-shadow for simpler look */
+}
+
+.status-pill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-pill.success {
+    background: rgba(10, 255, 104, 0.15);
+    color: var(--neon-green);
+    border: 1px solid var(--neon-green);
+    box-shadow: 0 0 10px rgba(10, 255, 104, 0.2);
+}
+
+/* Ticker Tape - Enhanced Cyberpunk Design */
+.ticker-wrap {
+    width: auto;
+    margin: -1rem -1rem 0 -1rem;
+    overflow: hidden;
+    background: linear-gradient(90deg,
+            rgba(15, 23, 42, 0.95) 0%,
+            rgba(24, 173, 236, 0.1) 50%,
+            rgba(15, 23, 42, 0.95) 100%);
+    border-bottom: 3px solid var(--neon-blue);
+    padding: 15px 0;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1001;
+    /* Above sticky header */
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.5),
+        0 0 30px rgba(56, 189, 248, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.ticker-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(56, 189, 248, 0.05) 20%,
+            rgba(56, 189, 248, 0.1) 50%,
+            rgba(56, 189, 248, 0.05) 80%,
+            transparent 100%);
+    animation: ticker-glow 3s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+.ticker {
+    display: inline-flex;
+    gap: 0;
+    animation: ticker-scroll 35s linear infinite;
+    min-width: 100%;
+    will-change: transform;
+}
+
+.ticker:hover {
+    animation-play-state: paused;
+    filter: brightness(1.1);
+}
+
+.ticker__item {
+    flex-shrink: 0;
+    padding: 0 2.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.ticker__item:hover {
+    background: rgba(56, 189, 248, 0.05);
+    transform: scale(1.02);
+}
+
+.ticker__item::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 2px;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            var(--neon-blue) 50%,
+            transparent 100%);
+    opacity: 0.3;
+}
+
+.ticker-symbol {
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.ticker-up {
+    color: var(--neon-green);
+    font-weight: 600;
+    text-shadow: 0 0 6px rgba(74, 222, 128, 0.4);
+    animation: price-pulse-up 2s ease-in-out infinite;
+}
+
+.ticker-down {
+    color: var(--error);
+    font-weight: 600;
+    text-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+    animation: price-pulse-down 2s ease-in-out infinite;
+}
+
+@keyframes ticker-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes ticker-glow {
+    0% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes price-pulse-up {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes price-pulse-down {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(0.95);
+    }
+}
+
+/* Terminal Card Component */
+.terminal-card {
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid var(--neon-blue);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+    overflow: hidden;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.terminal-header {
+    background: rgba(56, 189, 248, 0.1);
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.terminal-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.terminal-dot.red {
+    background-color: #ff5f56;
+}
+
+.terminal-dot.yellow {
+    background-color: #ffbd2e;
+}
+
+.terminal-dot.green {
+    background-color: #27c93f;
+}
+
+.terminal-title {
+    margin-left: 10px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--neon-blue);
+    opacity: 0.8;
+}
+
+.terminal-body {
+    padding: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: #f8fafc;
+    /* Bright White-ish */
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.cursor {
+    display: inline-block;
+    color: var(--neon-blue);
+    font-weight: bold;
+    animation: blink-cursor 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink-cursor {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Header Notes Styling */
+.header-notes-box {
+    margin: 15px auto 0 auto;
+    /* Centered */
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.05) 0%, rgba(15, 23, 42, 0.4) 100%);
+    border-left: 3px solid var(--neon-gold);
+    border-right: 3px solid var(--neon-gold);
+    /* Symmetrical border for center look */
+    padding: 10px 20px;
+    border-radius: 8px;
+    /* Fully rounded */
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    max-width: 900px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    text-align: center;
+    /* Center text inside */
+}
+
+.header-notes-box:hover {
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0%, rgba(15, 23, 42, 0.6) 100%);
+    border-color: var(--neon-blue);
+    transform: translateY(-2px);
+}
+
+.note-item {
+    margin: 4px 0;
+    display: flex;
+    justify-content: center;
+    /* Center flex items */
+    align-items: center;
+    gap: 10px;
+    color: rgba(244, 247, 250, 1);
+}
+
+.note-label {
+    color: var(--neon-gold);
+    font-weight: 700;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.note-item span:not(.note-label) {
+    color: rgba(250, 250, 250, 1);
+}
+
+/* 
+   ==========================================================================
+   9. Mobile Responsiveness & Layout Utilities
+   ========================================================================== 
+*/
+
+/* Header Specific Layouts */
+.glass-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 15px 20px;
+}
+
+.header-top-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-container {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    padding: 5px;
+    border: 1px solid var(--neon-blue);
+}
+
+.beta-badge {
+    font-size: 0.8rem;
+    color: var(--neon-gold);
+    vertical-align: super;
+    letter-spacing: 1px;
+    -webkit-text-fill-color: initial;
+}
+
+/* MEDIA QUERIES FOR MOBILE (Max Width 768px) */
+@media (max-width: 768px) {
+
+    /* Global Adjustments */
+    .stApp {
+        padding: 1rem 0.5rem;
+        /* Less padding on edges */
+    }
+
+    /* Header Stack */
+    .header-top-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .status-pill {
+        align-self: flex-start;
+        /* Move pill to left on mobile */
+    }
+
+    .header-title {
+        font-size: 1.4rem;
+        /* Smaller Title */
+    }
+
+    .header-notes-box {
+        font-size: 0.7rem;
+        padding: 10px;
+        text-align: left;
+        /* Easier to read on mobile */
+    }
+
+    .note-item {
+        flex-direction: column;
+        /* Stack label and text */
+        align-items: flex-start;
+        gap: 2px;
+        text-align: center;
+        /* Center align for improved look */
+    }
+
+    /* Smart Criteria Rows */
+    .smart-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 1rem;
+    }
+
+    .smart-label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .smart-row>div:last-child {
+        width: 100%;
+        justify-content: space-between;
+        /* Spread value and icon */
+        margin-top: 5px;
+        border-top: 1px solid var(--glass-border);
+        padding-top: 5px;
+    }
+
+    .smart-value {
+        font-size: 1rem;
+        /* Slightly smaller */
+    }
+
+    /* Metrics containers */
+    div[data-testid="metric-container"] {
+        padding: 1rem;
+    }
+
+    div[data-testid="stMetricValue"] {
+        font-size: 1.5rem !important;
+        /* Smaller metric numbers */
+    }
+}
