@@ -65,6 +65,8 @@ def main():
         # Increment key ID to force completley new widget render
         st.session_state.search_key_id += 1
         st.session_state.auto_run_analysis = True
+        # Explicitly trigger rerun for consistent behavior in deployment
+        st.rerun()
 
     # Check for auto-run flag
     if st.session_state.get('auto_run_analysis', False):
